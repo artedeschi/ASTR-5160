@@ -1,3 +1,3 @@
 # ASTR-5160
-Repository for ASTR-5160 Class at UWyo
+Code for ASTR-5160 at the University of Wyoming
 Assignments are grouped by week
