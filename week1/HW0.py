@@ -1,21 +1,43 @@
+"""
+Code by Adam Tedeschi
+For ASTR5160 at UWyo 2025
+HW0.py
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 import sys
 
 def GenLine(xs,m,b):  #ART Function used for curve_fit fitting
+    """
+    generates points of a line given x data, slope (m) and y-intercept (b)
+    inputs: xs (array of floats); m (float); b (float)
+    outputs: points (array of floats)
+    """
     return xs*m+b
 
 def GenData(m,b):
+    """
+    Generates linear data with random scatter given a slope (m) and y-intecept (b)
+    inputs: m (float); b (float)
+    outputs: xs [x data] (array of floats); ys [y data] (array of floats); yerrs [error in y data] (array of floats
+    """
     xs = np.sort(np.random.uniform(0,10,10)) 
     ys = GenLine(xs,m,b)  #ART Must use separate fuction that takes in x so I can use curve_fit
     scatter = np.random.normal(0,0.5,10)
     ys = ys + scatter	  #ART Data points made with random scatter
-    yerrs = np.array([0.5]*10)
+    yerrs = np.array([0.5]*10)  #ART creates an array of 0.5 with a length of 10
     
     return xs, ys, yerrs
     
 def FitData(xs,ys,yerrs):
+    """
+    Finds a linear best fit in slope (m) and y-intercept (b) given x data, y data, and error
+    inputs: xs (array of floats); ys (array of floats); yerrs (array of floats)
+    outputs: m2 [best fit slope] (float); b2 [best fit y-intercept] (float)    
+    """
+
     popt,pcov = curve_fit(GenLine,xs,ys,sigma=yerrs)   #ART Finding best model with curve_fit. popt is best-fit parameters, and pcov is the covarience matrix
     
     m2 = popt[0]
@@ -23,7 +45,14 @@ def FitData(xs,ys,yerrs):
     
     return m2,b2
     
-def PlotData(xs,ys,m,b,m2,b2,yerrs):   #ART Plots original model, scattered data with error bars, and fitted model.
+def PlotData(xs,ys,m,b,m2,b2,yerrs):
+    """
+    Plots original model, scattered data with error bars, and fitted model
+    inputs" xs [generated x data] (array of floats); ys [generated y data] (array of floats);
+    m [original slope] (float); b [original y-intercept] (float); m2 [fitted slope] (float);
+    b2 [fitted y-intercept] (float); yerrs [error in ys] (array of floats)
+    outputs: returns None; displays and saves plot
+    """
 
     plt.figure('HW0',figsize=(8,8))
     plt.errorbar(xs,ys,yerr=yerrs,color='b', marker = 'o', capsize = 3, linestyle='None', label='Raw Data')
