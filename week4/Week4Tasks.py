@@ -19,20 +19,12 @@ def PlotData(dat, proj = None):
     fig = plt.figure(proj)
     ax = fig.add_subplot(111,projection=proj)  #Default cartesian if proj is None
     ax.scatter(RAs,Decs,s=0.25,c='y')
-    if proj == None:
+    
+    if proj == None:   #RA in deg and fewer lines for cartesian
         xlab = [r'-180$^\circ$',r'120$^\circ$',r'-60$^\circ$',r'0$^\circ$',r'60$^\circ$',r'120$^\circ$',r'180$^\circ$']
         xticks = np.linspace(-np.pi,np.pi,7)
         ylab = [r'-90$^\circ$',r'-60$^\circ$',r'-30$^\circ$',r'0$^\circ$',r'30$^\circ$',r'60$^\circ$',r'90$^\circ$']
         yticks = np.linspace(-np.pi/2,np.pi/2,7)
-    else:
-        xlab = ['14h','16h','18h','20h','22h','0h','2h','4h','6h','8h','10h']
-        xticks = np.linspace(-np.pi,np.pi,11)
-        ylab = [r'-90$^\circ$',r'-75$^\circ$',r'-60$^\circ$',r'-45$^\circ$',r'-30$^\circ$',r'-15$^\circ$',r'0$^\circ$',r'15$^\circ$',r'30$^\circ$',r'45$^\circ$',r'60$^\circ$',r'75$^\circ$',r'90$^\circ$']
-        yticks = np.linspace(-np.pi/2,np.pi/2,13)
-    
-    
-    
-    if proj == None:
         ax.set_xticks(xticks,labels=xlab)
         ax.set_yticks(yticks,labels=ylab)
         ax.set_xlabel('RA (deg)',fontsize=14)
@@ -41,20 +33,25 @@ def PlotData(dat, proj = None):
         ax.set_ylim(-np.pi/2,np.pi/2)
         plt.grid(color='k',linewidth=1)
         
-    elif proj == 'aitoff':
-
-        ax.set_xticks(xticks,labels=xlab, weight=800)
-        ax.set_yticks(yticks,labels=ylab)
-        ax.set_xlabel('RA (Hour)',fontsize=14,labelpad=20)
-        ax.set_ylabel('Dec (deg)',fontsize=14)
-        plt.grid(color='b', linestyle='--',linewidth=2)
+    else:
+        xlab = ['14h','16h','18h','20h','22h','0h','2h','4h','6h','8h','10h']
+        xticks = np.linspace(-np.pi,np.pi,11)
+        ylab = [r'-90$^\circ$',r'-75$^\circ$',r'-60$^\circ$',r'-45$^\circ$',r'-30$^\circ$',r'-15$^\circ$',
+        r'0$^\circ$',r'15$^\circ$',r'30$^\circ$',r'45$^\circ$',r'60$^\circ$',r'75$^\circ$',r'90$^\circ$']
+        yticks = np.linspace(-np.pi/2,np.pi/2,13)
         
-    else:  #basically just lambert
-        ax.set_xticks(xticks,labels=xlab, weight=800)
-        ax.set_yticks(yticks,labels=[' ']*len(yticks))
-        plt.grid(color='b', linestyle='--',linewidth=2)
-        
-    ax.invert_xaxis()
+        if proj == 'aitoff':
+            ax.set_xticks(xticks,labels=xlab, weight=800)
+            ax.set_yticks(yticks,labels=ylab)
+            ax.set_xlabel('RA (Hour)',fontsize=14,labelpad=20)
+            ax.set_ylabel('Dec (deg)',fontsize=14)
+            plt.grid(color='b', linestyle='--',linewidth=2)
+        else:  #basically just lambert
+            ax.set_xticks(xticks,labels=xlab, weight=800)
+            ax.set_yticks(yticks,labels=[' ']*len(yticks)) #Matching no Dec labels like in your example
+            plt.grid(color='b', linestyle='--',linewidth=2)
+            
+    ax.invert_xaxis()   #So RA increases to the left
         
 def FindAngle(coord1,coord2):
      x1,y1,z1 = coord1.x,coord1.y,coord1.z
