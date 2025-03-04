@@ -32,8 +32,8 @@ def MakeTable(month,coordlist,loc='kpno',shift=7):
     National Observatory; shift (float timezone shift relative to UTC coorresponding to desired location) Default 
     corresponds to +7 (MT), which is the local time at KPNO
     Outputs: 5xN Structured Array of best quasar coordinate and its airmass to observe at the location for each 
-    day of the month. The 5 fields are 'obstimes' (local time), 'coords' (hms+/-dms), 'RAs' (deg), 'Decs' (deg), and 'Airmass'
-    This output is made to be directly input into the PrintTable() function
+    day of the month. 'N' is number of days in the month The 5 fields are 'obstimes' (local time), 'coords' (hms+/-dms), 
+    'RAs' (deg), 'Decs' (deg), and 'Airmass'. This output is made to be directly input into the PrintTable() function
     """
 
     #ART Initializing and setting list of Dates in UTC as Time objects
@@ -44,7 +44,7 @@ def MakeTable(month,coordlist,loc='kpno',shift=7):
     sec = 0
     date = Time(datetime(year,month,day,hour,minute,sec))
     utcdates = []
-    while date.datetime.month == month:		  #ART While the next date is still within the month
+    while date.datetime.month == month:		  #ART While the date is still within the month
 	     utcdates.append(date+shift*u.hour)   #ART add shift to convert from local to UTC (will decovert later)
 	     date += 1*u.day
      

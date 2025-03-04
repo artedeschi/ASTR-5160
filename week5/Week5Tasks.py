@@ -35,7 +35,7 @@ def Dec_Cap(Dec):
     four_vec = np.append(xyz,h)
     return four_vec
 
-def Coord_Cap(RA,Dec,Theta):
+def Coord_Cap(RA,Dec,theta):
     
     h = 1.-np.cos(theta).value
     norm_coord = SkyCoord(RA,Dec)
