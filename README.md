@@ -2,7 +2,7 @@
 Code for ASTR-5160 at the University of Wyoming
 Assignments are grouped by week
 Both lessons for each week are kept in the same file called "Week[#]Tasks.py" if they are both coding assignments.
-Homeworks are left in the week folder that I started it in.
+Homeworks are found in the homework folder
 
 Topics covered so far (number don't necessarily correspond to lesson):
 1. Basic git usage and commands
