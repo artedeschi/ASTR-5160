@@ -153,7 +153,7 @@ if __name__ == "__main__":
 
     #0s are stars. 1s are QSOs
     
-    qsoknn = neighbors.KNeighborsClassifier(n_neighbors = 4)  #4 seems reasonable here
+    qsoknn = neighbors.KNeighborsClassifier(n_neighbors = 3)  #3 seems reasonable here
     qsoknn.fit(fulldat,dat_class)
     
     n = 100000

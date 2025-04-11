@@ -45,12 +45,12 @@ def flux2mag(F):
 #        index = np.nan
 #    return index
     
-def matchAllObj(objCoords,allsweepcoords):
+def matchAllObj(objCoords,allsweepcoords,maxsep = 0.5):
     inds,seps,sep3d = objCoords.match_to_catalog_sky(allsweepcoords)
     if objCoords.ndim > 0: #If there's more than one obj coord
-        inds[seps.to(units.arcsec).value > 0.5] = -1
+        inds[seps.to(units.arcsec).value > maxsep] = -1
     else:
-        if seps.to(units.arcsec).value > 0.5:
+        if seps.to(units.arcsec).value > maxsep:
             inds = -1
     return inds
     
