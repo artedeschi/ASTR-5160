@@ -1,3 +1,10 @@
+"""
+Code by Adam Tedeschi
+For ASTR5160 at UWyo 2025
+final.py
+"""
+
+
 import numpy as np
 import os
 import matplotlib.pyplot as plt

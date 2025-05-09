@@ -239,7 +239,7 @@ if __name__ == "__main__":
     print('Reading in datafile...')
     
     try:
-        indata = fits.open(infile)[1].data
+        indata = fits.open(infile,memmap=True)[1].data
     except (OSError, FileNotFoundError):
         raise OSError(f'Invalid input. No valid datafile found at \"{infile}\"')
         
